@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "lebron",
+      "password": "lebron123"
+    },
+    {
+      "username": "curry",
+      "passwordHash": "curry123"
+    },
+    {
+      "username": "harden",
+      "password": "harden123"
+    },{
+      "username": "sga",
+      "password": "sga123"
+    }
+  ]
+}
