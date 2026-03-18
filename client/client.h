@@ -1,6 +1,7 @@
 #define MAX_NAME 20 // Twitter OG username limit  
 #define MAX_DATA 140 // Twitter OG character limit
-#define MAX_USER_INPUT 100
+#define MAX_USER_INPUT 200 // Random but at least greater than max data
+#define MAX_MSG_LEN 168 // Max data + max name + 2*(int) for type and size
 
 // Standardizing messages
 typedef struct {

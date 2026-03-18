@@ -21,20 +21,21 @@ int main(int argc, char** argv){
     }
     int server_port = atoi(argv[1]);
 
-    // Create TCP listen socket (file descriptor and address object for IP + port)
+    // Create TCP listen socket file descriptor
     int listen_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (listen_socket < 0){
         perror("Listen socket");
         return -1;
     }
 
+    // Create and populate address object for IP + port
     struct sockaddr_in server_addr = {
         .sin_family = AF_INET, 
         .sin_addr.s_addr = INADDR_ANY, 
         .sin_port = htons(server_port)
     };
 
-    // Bind fd to port
+    // Bind file descriptor to port
     if (bind(listen_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         perror("Listen socket");
         return -1;
