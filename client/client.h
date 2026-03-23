@@ -1,9 +1,11 @@
-#define MAX_NAME 20 // Twitter OG username limit  
-#define MAX_DATA 140 // Twitter OG character limit
-#define MAX_USER_INPUT 200 // Random but at least greater than max data
-#define MAX_MSG_LEN 168 // Max data + max name + 2*(int) for type and size
+#ifndef CLIENT_H
+#define CLIENT_H
 
-// Standardizing messages
+#define MAX_NAME 20
+#define MAX_DATA 140
+#define MAX_USER_INPUT 200
+#define MAX_SESSIONS 32
+
 typedef struct {
     unsigned int type;
     unsigned int size;
@@ -22,7 +24,7 @@ typedef enum {
     LEAVE_SESS,
     NEW_SESS,
     NS_ACK,
-    MESSAGE, 
+    MESSAGE,
     QUERY,
     QU_ACK
 } Message_type;
@@ -34,5 +36,10 @@ typedef enum {
     LEAVE_SESSION,
     CREATE_SESSION,
     LIST_SESSIONS,
-    QUIT_CLIENT
+    QUIT_CLIENT,
+    SWITCH_SESSION,
+    SEND_TEXT,
+    INVALID_ACTION
 } Client_action;
+
+#endif
