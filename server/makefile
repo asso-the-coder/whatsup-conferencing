@@ -1,17 +1,30 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -pedantic -std=c11
-LDFLAGS = -pthread
+CFLAGS = -Wall -Wextra -g -Iinclude -MMD -MP
 
-TARGET = server
-SRC = server.c
-HDR = server.h
+TARGET = bin/server
+
+SRC_DIR = src
+BUILD_DIR = build
+
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+DEPS = $(OBJS:.o=.d)
 
 all: $(TARGET)
 
-$(TARGET): $(SRC) $(HDR)
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(OBJS) | bin
+	$(CC) $(OBJS) -o $(TARGET)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | build
+	$(CC) $(CFLAGS) -c $< -o $@
+
+build:
+	mkdir -p build
+
+bin:
+	mkdir -p bin
 
 clean:
-	rm -f $(TARGET)
+	rm -rf build bin
 
-.PHONY: all clean
+-include $(DEPS)
